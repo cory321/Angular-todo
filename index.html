@@ -17,12 +17,12 @@
 				</div>
 				<br>
 					<!-- Create your form below, try adding some angular validations -->
-					<form role="form" ng-submit="addTodo()">
-
+					<form name="todoForm" role="form" ng-submit="addTodo()">
+						<small>Min-Length: 3, Max-Length:20</small><br><br>
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Add new todo" ng-model="todo">
+						<input type="text" class="form-control" placeholder="Add new todo" ng-model="todo" ng-minlength="3" ng-maxlength="20" required>
 						<span class="input-group-btn">
-							<input type="submit" value="Add" class="btn btn-primary">
+							<input type="submit" value="Add" class="btn btn-primary" ng-disabled="todoForm.$invalid">
 						</span>
 					</div>
 					</form>
