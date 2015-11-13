@@ -5,6 +5,14 @@
 		<title>Angular To Do App</title>
 		<!-- Latest compiled and minified CSS for bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<style>
+			input.ng-invalid {
+			  border: 1px solid red;
+			}
+			input.ng-valid {
+			  border: 1px solid green;
+			}
+		</style>
 	</head>
 	<body ng-controller="TodosController">
 		<div class="container" >
@@ -20,15 +28,34 @@
 					<form name="todoForm" role="form" ng-submit="addTodo()">
 						<small>Min-Length: 3, Max-Length:20</small><br><br>
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Add new todo" ng-model="todo" ng-minlength="3" ng-maxlength="20" required>
+						<input type="text" name="todoInput" class="form-control" placeholder="Add new todo" ng-model="todo" ng-minlength="3" ng-maxlength="20" required>
 						<span class="input-group-btn">
 							<input type="submit" value="Add" class="btn btn-primary" ng-disabled="todoForm.$invalid">
 						</span>
 					</div>
 					</form>
+
 				</div>
 			</div>
-			<br>
+			<div class="row">
+			<div class="col-md-8 col-md-offset-2"><br>
+					<div class="alert alert-danger" role="alert" ng-show="todoForm.todoInput.$dirty && todoForm.todoInput.$invalid">
+					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					  <span class="sr-only">Error:</span>
+					  	    <small class="error" ng-show="todoForm.todoInput.$error.required">
+					  	       		A new todo is required.
+					  	    </small>
+					  	    <small class="error" 
+					  	            ng-show="todoForm.todoInput.$error.minlength">
+					  	            Your name is required to be at least 3 characters
+					  	    </small>
+					  	    <small class="error" 
+					  	            ng-show="todoForm.todoInput.$error.maxlength">
+					  	            Your name cannot be longer than 20 characters
+					  	    </small>
+					</div>
+			</div>	
+			</div>
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<p ng-repeat="todo in todos" class="input-group">
